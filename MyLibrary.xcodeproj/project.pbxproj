@@ -13,6 +13,7 @@
 		672B5B332185D4240072EC66 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 672B5B322185D4240072EC66 /* Assets.xcassets */; };
 		672B5B362185D4240072EC66 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 672B5B342185D4240072EC66 /* LaunchScreen.storyboard */; };
 		672B5B3E2185D4830072EC66 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672B5B3D2185D4830072EC66 /* MainTabBarController.swift */; };
+		672B5B402185DA450072EC66 /* BookDisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672B5B3F2185DA450072EC66 /* BookDisplayController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		672B5B352185D4240072EC66 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		672B5B372185D4240072EC66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		672B5B3D2185D4830072EC66 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		672B5B3F2185DA450072EC66 /* BookDisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDisplayController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				672B5B2B2185D41B0072EC66 /* AppDelegate.swift */,
 				672B5B3D2185D4830072EC66 /* MainTabBarController.swift */,
+				672B5B3F2185DA450072EC66 /* BookDisplayController.swift */,
 				672B5B2D2185D41B0072EC66 /* ViewController.swift */,
 				672B5B2F2185D41B0072EC66 /* Main.storyboard */,
 				672B5B322185D4240072EC66 /* Assets.xcassets */,
@@ -141,6 +144,7 @@
 				672B5B2E2185D41B0072EC66 /* ViewController.swift in Sources */,
 				672B5B2C2185D41B0072EC66 /* AppDelegate.swift in Sources */,
 				672B5B3E2185D4830072EC66 /* MainTabBarController.swift in Sources */,
+				672B5B402185DA450072EC66 /* BookDisplayController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
