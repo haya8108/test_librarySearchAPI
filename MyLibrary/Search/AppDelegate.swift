@@ -18,8 +18,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         window = UIWindow()
-        window?.rootViewController = MainTabBarController()
+        window?.makeKeyAndVisible()
         
+        let ctrl = LibSearchController()
+        let navController = UINavigationController(rootViewController: ctrl)
+        
+        window?.rootViewController = navController
+//        window?.rootViewController = MainTabBarController()
+  
         
         return true
     }

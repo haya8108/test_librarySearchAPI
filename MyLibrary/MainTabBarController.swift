@@ -14,20 +14,23 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .red
         
+        
         setupViewControllers()
     }
     
     func setupViewControllers() {
     
-        let testCtrl = UINavigationController(rootViewController: UIViewController())
-        testCtrl.tabBarItem.image = #imageLiteral(resourceName: "ribbon")
-        testCtrl.tabBarItem.selectedImage = #imageLiteral(resourceName: "ribbon")
-       
-        let tempTestCtrl = templateNavController(unselectedImage: #imageLiteral(resourceName: "ribbon"), selectedImage: #imageLiteral(resourceName: "ribbon"), rootViewController: UIViewController())
+        
+        let layout = UICollectionViewFlowLayout()
+        let bookDisplayController = templateNavController(unselectedImage: #imageLiteral(resourceName: "ribbon"), selectedImage: #imageLiteral(resourceName: "ribbon"), rootViewController: BookDisplayController(collectionViewLayout: layout))
+        
+
+        let booksearchController = templateNavController(unselectedImage: #imageLiteral(resourceName: "ribbon"), selectedImage: #imageLiteral(resourceName: "ribbon"), rootViewController: BookSearchController(collectionViewLayout: layout))
+
         
         viewControllers = [
-        testCtrl,
-        tempTestCtrl]
+        bookDisplayController,
+        booksearchController]
         
         guard let items = tabBar.items else { return }
         
