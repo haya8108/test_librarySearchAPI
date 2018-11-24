@@ -38,5 +38,14 @@ extension UIView {
             heightAnchor.constraint(equalToConstant: height).isActive = true
         }
     }
-    
 }
+
+
+extension UIColor {
+    
+    static let lightPink = UIColor(red: 247/255, green: 196/255, blue: 212/255, alpha: 1)
+    
+    
+    static let lightBlue = UIColor(red: 196/255, green: 212/255, blue: 247/255, alpha: 1)
+}
+

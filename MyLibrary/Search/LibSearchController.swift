@@ -10,23 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 
-struct Library {
-    let libid: String
-    
-    enum SerializationError: Error {
-        case missing(String)
-        case invalid(String, Any)
-    }
-    
-    init(json: [String : Any]) throws {
-        guard let libid = json["libid"] as? String else { throw SerializationError.missing("libid is missing")}
-    
-        self.libid = libid
-    }
-    
-}
-
-class LibSearchController: UIViewController, UISearchBarDelegate {
+class LibSearchController: UITableViewController, UISearchBarDelegate {
     
     lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
@@ -36,12 +20,14 @@ class LibSearchController: UIViewController, UISearchBarDelegate {
         return sb
     }()
     
+    let cellId = "cellId"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("searchLibController")
         
         setupView()
-        
+        tableView.register(LibSearchCell.self, forCellReuseIdentifier: cellId)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -67,7 +53,7 @@ class LibSearchController: UIViewController, UISearchBarDelegate {
                         // 位置情報から緯度経度をtargetCoordinateに取り出す(10)
                         let targetCoordinate = location.coordinate
                       
-                        self.geocodeToLib(location: targetCoordinate, longitude: targetCoordinate.longitude, latitude: targetCoordinate.latitude)
+                        self.geocodeToLib(longitude: targetCoordinate.longitude, latitude: targetCoordinate.latitude)
                         
                     }
                 }
@@ -75,11 +61,11 @@ class LibSearchController: UIViewController, UISearchBarDelegate {
         })
     }
     
-    func geocodeToLib(location: CLLocationCoordinate2D,longitude: CLLocationDegrees, latitude: CLLocationDegrees) {
+    func geocodeToLib(longitude: CLLocationDegrees, latitude: CLLocationDegrees) {
         
-        let jsonUrlString = "https://api.calil.jp/library?appkey=91f355530e31cadbd7fdc2f165269fdf&geocode=\(longitude),\(latitude)&format=json&callback="
+        var libraries: [Library] = []
         
-        guard let url = URL(string: jsonUrlString) else { return }
+        guard let url = URL(string: "") else { return }
         
 
         URLSession.shared.dataTask(with: url, completionHandler: { (data, rsp, err) in
@@ -91,21 +77,20 @@ class LibSearchController: UIViewController, UISearchBarDelegate {
                         else { return }
                     
                     for object in json {
-                        if let libid = object["libid"] as? String,
-                        let formal = object["formal"] as? String,
-                            let post = object["post"] as? String,
-                        let adress = object["address"] as? String,
-                        let geocode = object["geocode"] as? String {
-                            print(formal,post,adress,geocode,libid)
+                        if let library = try? Library(json: object) {
+                            libraries.append(library)
                         }
                     }
-                    
+                
+                
                 }
+                
             } catch {
                 print( SerializationError.someError("something wrong"))
             }
-
+            
         }).resume()
+        
         
     }
     
@@ -119,5 +104,13 @@ class LibSearchController: UIViewController, UISearchBarDelegate {
         
     }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        return cell
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
     
 }
