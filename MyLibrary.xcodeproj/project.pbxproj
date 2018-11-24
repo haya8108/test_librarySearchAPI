@@ -19,11 +19,13 @@
 		672B5B422185DF450072EC66 /* BookDisplayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672B5B412185DF450072EC66 /* BookDisplayCell.swift */; };
 		672B5B442185E4620072EC66 /* BookSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672B5B432185E4620072EC66 /* BookSearchController.swift */; };
 		672B5B462185E5AE0072EC66 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672B5B452185E5AE0072EC66 /* Extensions.swift */; };
+		672C919A21A9F08C00A86616 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 672C919921A9F08C00A86616 /* Endpoint.swift */; };
 		67642EED21A8E00500EB2A36 /* BookSearchTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67642EEC21A8E00500EB2A36 /* BookSearchTableVC.swift */; };
 		67642EF121A8F1CA00EB2A36 /* GoogleBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67642EF021A8F1CA00EB2A36 /* GoogleBook.swift */; };
 		6772B44C21890256007FEE38 /* BookDisplayColumnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6772B44B21890256007FEE38 /* BookDisplayColumnCell.swift */; };
 		6774720D21A030AD00E1EEBD /* LibSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6774720C21A030AD00E1EEBD /* LibSearchController.swift */; };
 		6792613321A9485E00211A89 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792613221A9485E00211A89 /* APIClient.swift */; };
+		6792613521A9658800211A89 /* BookDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6792613421A9658800211A89 /* BookDetailController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,11 +43,13 @@
 		672B5B412185DF450072EC66 /* BookDisplayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDisplayCell.swift; sourceTree = "<group>"; };
 		672B5B432185E4620072EC66 /* BookSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchController.swift; sourceTree = "<group>"; };
 		672B5B452185E5AE0072EC66 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		672C919921A9F08C00A86616 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		67642EEC21A8E00500EB2A36 /* BookSearchTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchTableVC.swift; sourceTree = "<group>"; };
 		67642EF021A8F1CA00EB2A36 /* GoogleBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleBook.swift; sourceTree = "<group>"; };
 		6772B44B21890256007FEE38 /* BookDisplayColumnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDisplayColumnCell.swift; sourceTree = "<group>"; };
 		6774720C21A030AD00E1EEBD /* LibSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibSearchController.swift; sourceTree = "<group>"; };
 		6792613221A9485E00211A89 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		6792613421A9658800211A89 /* BookDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,9 +90,10 @@
 			isa = PBXGroup;
 			children = (
 				672B5B2B2185D41B0072EC66 /* AppDelegate.swift */,
-				67642EEC21A8E00500EB2A36 /* BookSearchTableVC.swift */,
-				67642EF021A8F1CA00EB2A36 /* GoogleBook.swift */,
-				6792613221A9485E00211A89 /* APIClient.swift */,
+				672C91A021A9FD8000A86616 /* BookSearch */,
+				672C919F21A9FD7400A86616 /* Structure */,
+				672C919D21A9FD3C00A86616 /* BookDetail */,
+				672C919E21A9FD5C00A86616 /* APIClient */,
 				670D2C55219F6E9E00D9AA93 /* setting */,
 				672B5B3D2185D4830072EC66 /* MainTabBarController.swift */,
 				672B5B3F2185DA450072EC66 /* BookDisplayController.swift */,
@@ -105,6 +110,39 @@
 				672B5B372185D4240072EC66 /* Info.plist */,
 			);
 			path = MyLibrary;
+			sourceTree = "<group>";
+		};
+		672C919D21A9FD3C00A86616 /* BookDetail */ = {
+			isa = PBXGroup;
+			children = (
+				6792613421A9658800211A89 /* BookDetailController.swift */,
+			);
+			path = BookDetail;
+			sourceTree = "<group>";
+		};
+		672C919E21A9FD5C00A86616 /* APIClient */ = {
+			isa = PBXGroup;
+			children = (
+				672C919921A9F08C00A86616 /* Endpoint.swift */,
+				6792613221A9485E00211A89 /* APIClient.swift */,
+			);
+			path = APIClient;
+			sourceTree = "<group>";
+		};
+		672C919F21A9FD7400A86616 /* Structure */ = {
+			isa = PBXGroup;
+			children = (
+				67642EF021A8F1CA00EB2A36 /* GoogleBook.swift */,
+			);
+			path = Structure;
+			sourceTree = "<group>";
+		};
+		672C91A021A9FD8000A86616 /* BookSearch */ = {
+			isa = PBXGroup;
+			children = (
+				67642EEC21A8E00500EB2A36 /* BookSearchTableVC.swift */,
+			);
+			path = BookSearch;
 			sourceTree = "<group>";
 		};
 		6774720E21A030BD00E1EEBD /* Search */ = {
@@ -188,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				671D299921A1F35A0077A9FD /* Structs.swift in Sources */,
+				6792613521A9658800211A89 /* BookDetailController.swift in Sources */,
 				6792613321A9485E00211A89 /* APIClient.swift in Sources */,
 				672B5B2E2185D41B0072EC66 /* ViewController.swift in Sources */,
 				672B5B422185DF450072EC66 /* BookDisplayCell.swift in Sources */,
@@ -198,6 +237,7 @@
 				6772B44C21890256007FEE38 /* BookDisplayColumnCell.swift in Sources */,
 				672B5B402185DA450072EC66 /* BookDisplayController.swift in Sources */,
 				671D299B21A207C40077A9FD /* LibSearchCell.swift in Sources */,
+				672C919A21A9F08C00A86616 /* Endpoint.swift in Sources */,
 				6774720D21A030AD00E1EEBD /* LibSearchController.swift in Sources */,
 				672B5B462185E5AE0072EC66 /* Extensions.swift in Sources */,
 				67642EF121A8F1CA00EB2A36 /* GoogleBook.swift in Sources */,

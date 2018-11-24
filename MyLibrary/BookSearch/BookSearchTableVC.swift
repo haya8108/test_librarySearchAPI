@@ -52,8 +52,13 @@ class BookSearchTableVC: UITableViewController, UISearchBarDelegate {
             searchBar.leftAnchor.constraint(equalTo: navBar.leftAnchor, constant: 8).isActive = true
             searchBar.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -8).isActive = true
             searchBar.bottomAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+        
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        searchBar.isHidden = false
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,23 +66,23 @@ class BookSearchTableVC: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = resultBooks[indexPath.row].volumeInfo.title
-        cell.detailTextLabel?.text = resultBooks[indexPath.row].volumeInfo.authors[0]
+        let cell = UITableViewCell(style: .subtitle , reuseIdentifier: cellId)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        cell.textLabel?.text = resultBooks[indexPath.row].volumeInfo?.title ?? ""
+        cell.detailTextLabel?.text = resultBooks[indexPath.row].volumeInfo?.authors?[0] ?? ""
+        cell.imageView?.image = #imageLiteral(resourceName: "ribbon")
         return cell
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let book = self.resultBooks[indexPath.row].volumeInfo
+        let bookDetailController = BookDetailController()
+        bookDetailController.book = book
+        searchBar.isHidden = true
+        navigationController?.pushViewController(bookDetailController, animated: true)
+        
+    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -86,28 +91,34 @@ class BookSearchTableVC: UITableViewController, UISearchBarDelegate {
     }
     
     
+    
+    
     func NameToIsbn(searchKey: String, completion: @escaping([Items]) -> Void) {
+  
+        let url = GoogleBookEndpoint.nameToIsbn(bookName: searchKey).request
         
-        let url = URLRequest(url: URL(string: "https://www.googleapis.com/books/v1/volumes?q=\(searchKey)&maxResults=2")!)
-        
+      //  let strUrl = URLRequest(url: URL(string: "https://www.googleapis.com/books/v1/volumes?q=swift")!)
+
         let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-        
+            
             var googleBook: [Items] = []
             
             let decoder = JSONDecoder()
             
-            
             do {
                 let decoded = try decoder.decode(GoogleBook.self, from: data!)
-                    let items = decoded.items
+    
+                guard let items = decoded.items else { return }
+                
                 for item in items {
                     googleBook.append(item)
+                    
                 }
             
                 DispatchQueue.main.async(execute: {
                     () -> Void in completion(googleBook)
                 })
-            } catch {
+            } catch { print("some error occur")
                 
             }
         }
