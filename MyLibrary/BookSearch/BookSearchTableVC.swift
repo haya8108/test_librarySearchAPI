@@ -66,11 +66,22 @@ class BookSearchTableVC: UITableViewController, UISearchBarDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        let book = resultBooks[indexPath.row].volumeInfo
+        
         let cell = UITableViewCell(style: .subtitle , reuseIdentifier: cellId)
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        cell.textLabel?.text = resultBooks[indexPath.row].volumeInfo?.title ?? ""
-        cell.detailTextLabel?.text = resultBooks[indexPath.row].volumeInfo?.authors?[0] ?? ""
-        cell.imageView?.image = #imageLiteral(resourceName: "ribbon")
+        cell.textLabel?.text = book?.title ?? ""
+        cell.detailTextLabel?.text = book?.authors?[0] ?? ""
+        
+        
+        
+        if let thumbnail = book?.imageLinks!["smallThumbnail"],
+            let url = URL(string: thumbnail.replacingOccurrences(of: "http://", with: "https://")),
+            let imageData = try? Data(contentsOf: url),
+            let image = UIImage(data: imageData) {
+            cell.imageView?.image = image
+        }
+        
         return cell
     }
     
@@ -112,7 +123,6 @@ class BookSearchTableVC: UITableViewController, UISearchBarDelegate {
                 
                 for item in items {
                     googleBook.append(item)
-                    
                 }
             
                 DispatchQueue.main.async(execute: {

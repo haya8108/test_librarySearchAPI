@@ -7,9 +7,10 @@
 ////
 
 import Foundation
+import UIKit
 
 struct  GoogleBook: Codable {
-    let items: [Items]?
+     let items: [Items]?
 }
 
 struct Items: Codable {
@@ -21,6 +22,21 @@ struct VolumeInfo: Codable {
     let authors: [String]?
     let industryIdentifiers: [[String : String]]?
     let imageLinks: [String : String]?
+    
+//    func loadImage(completion: @escaping (UIImage?) -> Void) {
+//
+//        guard let thumbnail = imageLinks!["smallThumbnail"] else { return }
+//        let url = URL(string: thumbnail.replacingOccurrences(of: "http://", with: "https://"))
+//        guard let imageData = try? Data(contentsOf: url!) else { return }
+//
+//        let image = UIImage(data: imageData)
+//        DispatchQueue.main.async {
+//            completion(image)
+//        }
+//    }
+    
+    
+    
 }
 
 
