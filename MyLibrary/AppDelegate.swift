@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         
-        let ctrl = BookSearchTableVC()
+        let ctrl = LibSearchController()
         let navController = UINavigationController(rootViewController: ctrl)
         
         window?.rootViewController = navController

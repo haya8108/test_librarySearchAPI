@@ -12,6 +12,9 @@ import MapKit
 
 class LibSearchController: UITableViewController, UISearchBarDelegate {
     
+    var resultLibs = [Library]()
+    let cellId = "cellId"
+    
     lazy var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.placeholder = "Search"
@@ -20,11 +23,10 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
         return sb
     }()
     
-    let cellId = "cellId"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("searchLibController")
+ 
+        print(resultLibs)
         
         setupView()
         tableView.register(LibSearchCell.self, forCellReuseIdentifier: cellId)
@@ -38,61 +40,60 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
         
         let geocoder = CLGeocoder()
         
-        // 入力された文字から位置情報を取得(6)
         geocoder.geocodeAddressString(searchKey, completionHandler: { (placemarks, error) in
             
-            // 位置情報が存在する場合はunwarpPlacemarksに取り出す(7)
             if let unwarpPlacemarks = placemarks {
                 
-                // 1件目の情報を取り出す(8)
                 if let firstPlacemark = unwarpPlacemarks.first {
                     
-                    // 位置情報を取り出す(9)
                     if let location = firstPlacemark.location {
                         
-                        // 位置情報から緯度経度をtargetCoordinateに取り出す(10)
                         let targetCoordinate = location.coordinate
-                      
-                        self.geocodeToLib(longitude: targetCoordinate.longitude, latitude: targetCoordinate.latitude)
-                        
+                 
+                        self.geocodeToLib(longitude: targetCoordinate.longitude, latitude: targetCoordinate.latitude, completion: { (libs) in
+                            
+                            self.resultLibs = libs
+                            
+                            DispatchQueue.main.async {
+                                self.tableView.reloadData()
+                            }
+                        })
                     }
                 }
             }
         })
     }
     
-    func geocodeToLib(longitude: CLLocationDegrees, latitude: CLLocationDegrees) {
+    func geocodeToLib(longitude: CLLocationDegrees, latitude: CLLocationDegrees,  completion: @escaping([Library]) -> Void) {
         
-        var libraries: [Library] = []
-        
-        guard let url = URL(string: "") else { return }
-        
+        var libs: [Library] = []
+
+        guard let url = URL(string: "https://api.calil.jp/library?appkey=91f355530e31cadbd7fdc2f165269fdf&geocode=\(longitude),\(latitude)&format=json&callback=") else { return }
 
         URLSession.shared.dataTask(with: url, completionHandler: { (data, rsp, err) in
 
             do {
                 if let data = data {
-
+      
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String : Any]]
                         else { return }
                     
                     for object in json {
                         if let library = try? Library(json: object) {
-                            libraries.append(library)
+                            libs.append(library)
+                        } else {
+                            print("errow occur on casting")
                         }
                     }
-                
-                
                 }
-                
+                completion(libs)
             } catch {
                 print( SerializationError.someError("something wrong"))
             }
             
         }).resume()
-        
-        
     }
+    
     
     func setupView() {
         
