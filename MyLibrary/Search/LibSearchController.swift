@@ -28,9 +28,25 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
  
         print(resultLibs)
         
+        if let navBar = navigationController?.navigationBar {
+            
+            navBar.isTranslucent = false
+            navBar.barTintColor = .orange
+            
+            navBar.addSubview(searchBar)
+            searchBar.translatesAutoresizingMaskIntoConstraints = false
+            searchBar.topAnchor.constraint(equalTo: navBar.topAnchor).isActive = true
+            searchBar.leftAnchor.constraint(equalTo: navBar.leftAnchor, constant: 8).isActive = true
+            searchBar.rightAnchor.constraint(equalTo: navBar.rightAnchor, constant: -8).isActive = true
+            searchBar.bottomAnchor.constraint(equalTo: navBar.bottomAnchor).isActive = true
+        }
+        
         setupView()
         tableView.register(LibSearchCell.self, forCellReuseIdentifier: cellId)
     }
+    
+    
+    //MARK: main func
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -57,6 +73,7 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
                             DispatchQueue.main.async {
                                 self.tableView.reloadData()
                             }
+                            
                         })
                     }
                 }
@@ -74,7 +91,7 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
 
             do {
                 if let data = data {
-      
+                    
                     guard let json = try JSONSerialization.jsonObject(with: data, options: []) as? [[String : Any]]
                         else { return }
                     
@@ -82,11 +99,15 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
                         if let library = try? Library(json: object) {
                             libs.append(library)
                         } else {
-                            print("errow occur on casting")
+                            print("errow occur")
                         }
                     }
                 }
-                completion(libs)
+                
+                DispatchQueue.main.async(execute: {
+                    () -> Void in completion(libs)
+                })
+                
             } catch {
                 print( SerializationError.someError("something wrong"))
             }
@@ -94,6 +115,8 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
         }).resume()
     }
     
+    
+    //MARK: view setup
     
     func setupView() {
         
@@ -105,13 +128,22 @@ class LibSearchController: UITableViewController, UISearchBarDelegate {
         
     }
     
+    //MARK: tableview
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.resultLibs.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        
+        let cell = UITableViewCell(style: .subtitle , reuseIdentifier: cellId)
+        cell.textLabel?.text = resultLibs[indexPath.row].formal
+        cell.detailTextLabel?.text = resultLibs[indexPath.row].address
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
     
 }

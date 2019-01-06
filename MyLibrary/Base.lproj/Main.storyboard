@@ -17,32 +17,9 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lHZ-MB-2Gi">
-                                <rect key="frame" x="0.0" y="219" width="375" height="162"/>
-                            </pickerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="here here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JL6-PT-agx">
-                                <rect key="frame" x="148" y="499" width="78" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="JL6-PT-agx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lel-YY-9oc"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="JL6-PT-agx" secondAttribute="bottom" constant="147" id="LfM-0I-UAO"/>
-                            <constraint firstItem="lHZ-MB-2Gi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="enc-ub-izn"/>
-                            <constraint firstItem="lHZ-MB-2Gi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="199" id="oYo-1n-aIL"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lHZ-MB-2Gi" secondAttribute="bottom" constant="286" id="p4N-2O-ZkD"/>
-                            <constraint firstItem="lHZ-MB-2Gi" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="twq-Vw-qd6"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <connections>
-                        <outlet property="myLabel" destination="JL6-PT-agx" id="bns-ZT-cwX"/>
-                        <outlet property="myPicker" destination="lHZ-MB-2Gi" id="AYb-Sa-tYN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
